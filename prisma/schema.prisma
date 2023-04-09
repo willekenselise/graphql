@@ -1,0 +1,106 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model absence {
+  idAbsence   Int      @id @default(autoincrement())
+  dateAbsence DateTime @db.Date
+  idCourse    Int
+  idStudent   Int
+  course      course   @relation(fields: [idCourse], references: [idCourse], onUpdate: Restrict, map: "absence_ibfk_1")
+  student     student  @relation(fields: [idStudent], references: [idStudent], onUpdate: Restrict, map: "absence_ibfk_2")
+
+  @@index([idCourse], map: "idCourse")
+  @@index([idStudent], map: "idStudent")
+}
+
+model course {
+  idCourse       Int          @id @default(autoincrement())
+  nameCourse     String       @db.VarChar(255)
+  idTeacher      Int
+  idProgramGroup Int
+  absence        absence[]
+  teacher        teacher      @relation(fields: [idTeacher], references: [idTeacher], onUpdate: Restrict, map: "course_ibfk_1")
+  programgroup   programgroup @relation(fields: [idProgramGroup], references: [idProgramGroup], onUpdate: Restrict, map: "course_ibfk_2")
+  rating         rating[]
+  schedule       schedule[]
+
+  @@index([idProgramGroup], map: "idProgramGroup")
+  @@index([idTeacher], map: "idTeacher")
+}
+
+model program {
+  idProgram        Int            @id @default(autoincrement())
+  nameProgram      String         @db.VarChar(255)
+  idProgramType    Int
+  isApprendiceship Boolean
+  programtype      programtype    @relation(fields: [idProgramType], references: [idProgramType], onUpdate: Restrict, map: "program_ibfk_1")
+  programgroup     programgroup[]
+
+  @@index([idProgramType], map: "idProgramType")
+}
+
+model programgroup {
+  idProgramGroup    Int       @id @default(autoincrement())
+  levelProgramGroup Int
+  nameProgramGroup  String    @db.VarChar(255)
+  idProgram         Int
+  course            course[]
+  program           program   @relation(fields: [idProgram], references: [idProgram], onUpdate: Restrict, map: "programgroup_ibfk_1")
+  student           student[]
+
+  @@index([idProgram], map: "idProgram")
+}
+
+model programtype {
+  idProgramType   Int       @id @default(autoincrement())
+  nameProgramType String?   @db.VarChar(255)
+  program         program[]
+}
+
+model rating {
+  idRating    Int      @id @default(autoincrement())
+  ratingValue Decimal? @db.Decimal(3, 1)
+  idStudent   Int
+  idCourse    Int
+  student     student  @relation(fields: [idStudent], references: [idStudent], onUpdate: Restrict, map: "rating_ibfk_1")
+  course      course   @relation(fields: [idCourse], references: [idCourse], onUpdate: Restrict, map: "rating_ibfk_2")
+
+  @@index([idCourse], map: "idCourse")
+  @@index([idStudent], map: "idStudent")
+}
+
+model schedule {
+  idSchedule        Int       @id @default(autoincrement())
+  scheduleDay       DateTime? @db.Date
+  scheduleStartTime DateTime? @db.Time(0)
+  scheduleEndTime   DateTime? @db.Time(0)
+  idCourse          Int
+  course            course    @relation(fields: [idCourse], references: [idCourse], onUpdate: Restrict, map: "schedule_ibfk_1")
+
+  @@index([idCourse], map: "idCourse")
+}
+
+model student {
+  idStudent      Int          @id @default(autoincrement())
+  firstName      String?      @db.VarChar(255)
+  lastName       String?      @db.VarChar(255)
+  idProgramGroup Int
+  absence        absence[]
+  rating         rating[]
+  programgroup   programgroup @relation(fields: [idProgramGroup], references: [idProgramGroup], onUpdate: Restrict, map: "student_ibfk_1")
+
+  @@index([idProgramGroup], map: "idProgramGroup")
+}
+
+model teacher {
+  idTeacher Int      @id @default(autoincrement())
+  firstName String?  @db.VarChar(255)
+  lastName  String?  @db.VarChar(255)
+  course    course[]
+}
