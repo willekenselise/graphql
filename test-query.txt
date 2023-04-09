@@ -1,0 +1,73 @@
+{
+  countStudentsByGroup(idProgramGroup: 1)
+  countStudentsByProgram(idProgram: 2)
+  countStudentsByProgramType(idProgramType: 1)
+  countAbsence(idStudent: 1)
+  studentAverageGrades(idStudent: 1)
+  courseAverageGrades(idCourse: 1)
+  programGroupsByLevel(levelProgramGroup: 5) {
+    nameProgramGroup
+  }
+  absences {
+    idAbsence
+    dateAbsence
+    student {
+      firstName
+      lastName
+    }
+  }
+  courses {
+    idCourse
+    nameCourse
+    teacher {
+      firstName
+      lastName
+    }
+    programgroup {
+      nameProgramGroup
+    }
+  }
+  programs {
+    idProgram
+    nameProgram
+    programgroup {
+      nameProgramGroup
+    }
+    isApprendiceship
+  }
+  programGroups {
+    idProgramGroup
+    nameProgramGroup
+    student {
+      firstName
+    }
+  }
+  programTypes {
+    nameProgramType
+  }
+  ratings {
+    ratingValue
+    student {
+      firstName
+      lastName
+    }
+    course {
+      nameCourse
+    }
+  }
+  schedules {
+    scheduleDay
+    scheduleStartTime
+    course {
+      nameCourse
+    }
+  }
+  students {
+    firstName
+    lastName
+  }
+  teachers {
+    lastName
+    firstName
+  }
+}

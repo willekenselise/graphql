@@ -1,0 +1,109 @@
+mutation {
+  addProgramType(nameProgramType: "Programme Executive") {
+    idProgramType
+    nameProgramType
+  }
+  updateProgramType(idProgramType: 4, nameProgramType: "Programme Executive Update") {
+    idProgramType
+    nameProgramType
+  }
+  deleteProgramType(idProgramType: 4) {
+    idProgramType
+    nameProgramType
+  }
+  addProgram(nameProgram: "L3", idProgramType: 2, isApprendiceship: true) {
+    idProgram
+  }
+  updateProgram(idProgram: 7, nameProgram: "L3 New", idProgramType: 2, isApprendiceship: false) {
+    idProgram
+  }
+  deleteProgram(idProgram: 7) {
+    idProgram
+    nameProgram
+  }
+  addprogramGroup(nameProgramGroup: "l2-3", idProgram: 3, levelProgramGroup: 2) {
+    idProgramGroup
+    nameProgramGroup
+    levelProgramGroup
+  }
+  updateprogramGroup(idProgramGroup: 12, nameProgramGroup: "l2-c", levelProgramGroup: 2, idProgram: 3) {
+    nameProgramGroup
+    idProgramGroup
+  }
+  deleteprogramGroup(idProgramGroup: 12) {
+    nameProgramGroup
+  }
+  addTeacher(firstName: "Louis", lastName: "Durand") {
+    idTeacher
+    lastName
+    firstName
+  }
+  updateTeacher(idTeacher: 5, firstName: "Louise", lastName: "Durand") {
+    idTeacher
+    lastName
+    firstName
+  }
+  deleteTeacher(idTeacher: 5) {
+    firstName
+    lastName
+  }
+  addStudent(firstName: "Maxence", lastName: "Pierre", idProgramGroup: 2) {
+    idStudent
+  }
+  updateStudent(idStudent: 17, firstName: "Maxence", lastName: "Pierre", idProgramGroup: 3) {
+    firstName
+    lastName
+    idProgramGroup
+  }
+  deleteStudent(idStudent: 17) {
+    firstName
+    lastName
+    idProgramGroup
+  }
+  addAbsence(idCourse: 1, idStudent: 2, dateAbsence: "2023-03-24") {
+    idAbsence
+    dateAbsence
+    idStudent
+  }
+  updateAbsence(idAbsence: 5, idCourse: 1, idStudent: 3, dateAbsence: "2023-03-24") {
+    idAbsence
+    dateAbsence
+  }
+  deleteAbsence(idAbsence: 5) {
+    idAbsence
+    dateAbsence
+  }
+  addRating(ratingValue: 19, idCourse: 1, idStudent: 1) {
+    idRating
+    ratingValue
+  }
+  updateRating(idRating: 10, ratingValue: 20, idCourse: 1, idStudent: 1) {
+    idRating
+    ratingValue
+  }
+  deleteRating(idRating: 10) {
+    idRating
+  }
+  addSchedule(scheduleDay: "2023-04-14", scheduleStartTime: "08:00", scheduleEndTime: "12:30", idCourse: 1) {
+    idSchedule
+  }
+  updateSchedule(idSchedule: 9, scheduleDay: "2023-04-15", scheduleStartTime: "08:00", scheduleEndTime: "12:30", idCourse: 1) {
+    idSchedule
+    scheduleDay
+  }
+  deleteSchedule(idSchedule: 9) {
+    idSchedule
+    scheduleDay
+  }
+  addCourse(nameCourse: "Cybersécurité", idTeacher: 3, idProgramGroup: 2) {
+    idCourse
+  }
+  updateCourse(idCourse: 9, nameCourse: "Mathématiques", idTeacher: 3, idProgramGroup: 2) {
+    idCourse
+    nameCourse
+  }
+  deleteCourse(idCourse: 9) {
+    idCourse
+    nameCourse
+  }
+}
